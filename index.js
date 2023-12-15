@@ -23,14 +23,14 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/api/contacto', (req, res) => {
-  const { name, email, message } = req.body;
+  const { userName, userEmail, message, asunto } = req.body;
 
   // Configuración del correo electrónico
   const mailOptions = {
-    from: {email},
+    from: {userEmail},
     to: 'jass2693@gmail.com',
-    subject: 'Nuevo mensaje de contacto',
-    text: `Nombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
+    subject: {asunto},
+    text: `Nombre: ${userName}\nMensaje: ${message}`,
   };
 
   // Envío del correo electrónico
