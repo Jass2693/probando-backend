@@ -23,14 +23,14 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/api/contacto', (req, res) => {
-  const { userName, userEmail, message, asunto } = req.body;
+  const { userName, userLastName, userEmail,asunto, message  } = req.body;
 
   // Configuración del correo electrónico
   const mailOptions = {
-    from: {userEmail},
+    from: userEmail,
     to: 'jass2693@gmail.com',
-    subject: {asunto},
-    text: `Nombre: ${userName}\nMensaje: ${message}`,
+    subject: asunto,
+    text: `Nombre: ${userName}\nEmail: ${userEmail}\nMensaje: ${message} `,
   };
 
   // Envío del correo electrónico
@@ -39,7 +39,7 @@ app.post('/api/contacto', (req, res) => {
       console.error(error);
       res.status(500).json({ success: false, error: 'Error al enviar el correo electrónico' });
     } else {
-      console.log('Correo electrónico enviado: ' + info.response);
+      console.log('Correo electrónico enviado: ' + info.response );
       res.json({ success: true });
     }
   });
